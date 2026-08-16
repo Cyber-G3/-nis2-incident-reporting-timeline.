@@ -1,5 +1,11 @@
 # NIS2 Incident Reporting Timeline
 
+## Open the live tool
+
+**[Launch the NIS2 Incident Reporting Timeline →](https://cyber-g3.github.io/-nis2-incident-reporting-timeline./)**
+
+Live URL: https://cyber-g3.github.io/-nis2-incident-reporting-timeline./
+
 A professional, privacy-first decision-support tool for building an evidence-ready NIS2 incident notification record.
 
 ## What it does
