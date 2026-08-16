@@ -8,6 +8,8 @@ Live URL: https://cyber-g3.github.io/-nis2-incident-reporting-timeline./
 
 A professional, privacy-first decision-support tool for building an evidence-ready NIS2 incident notification record.
 
+Version 1.1 adds bilingual EN/ES operation, live deadline countdowns, official country-reference routes, approval/submission states and a decision log.
+
 ## What it does
 
 - Calculates indicative **24-hour early warning**, **72-hour incident notification** and **one-month final report** milestones from the recorded awareness time.
