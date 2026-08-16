@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>NIS2 Incident Reporting Timeline & Readiness Checker | SpectraSec</title>
+  <meta name="description" content="Build an evidence-ready NIS2 incident notification timeline for the 24-hour early warning, 72-hour notification and one-month final report." />
+  <meta name="robots" content="index,follow" />
+  <meta property="og:title" content="NIS2 Incident Reporting Timeline" />
+  <meta property="og:description" content="Assess reporting readiness, calculate indicative deadlines and identify missing incident evidence." />
+  <meta property="og:type" content="website" />
+  <link rel="canonical" href="https://cyber-g3.github.io/-nis2-incident-reporting-timeline./" />
+  <link rel="stylesheet" href="styles.css" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"NIS2 Incident Reporting Timeline","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"provider":{"@type":"Organization","name":"SpectraSec","url":"https://www.spectrasec.eu/"}}</script>
+</head>
+<body>
+  <header class="topbar"><a class="brand" href="#">SPECTRASEC</a><div class="top-actions"><button id="demoBtn" class="ghost">Load DemoCo</button><button id="langBtn" class="ghost" aria-label="Switch language">ES</button></div></header>
+  <main>
+    <section class="hero">
+      <p class="eyebrow">NIS2 · INCIDENT RESPONSE</p>
+      <h1>Turn a cyber incident into an evidence-ready reporting timeline.</h1>
+      <p class="lead">Calculate indicative 24-hour, 72-hour and one-month milestones, test report completeness and surface the decisions that require immediate ownership.</p>
+      <div class="trust"><span>Local processing</span><span>No account</span><span>Exportable record</span><span>EN / ES</span></div>
+    </section>
+
+    <section class="workspace">
+      <aside class="steps" aria-label="Assessment progress">
+        <p class="eyebrow">ASSESSMENT</p>
+        <ol>
+          <li class="active">Incident context</li><li>Significance triage</li><li>Evidence record</li><li>Timeline & actions</li>
+        </ol>
+        <div class="privacy"><strong>Privacy by design</strong><p>Information stays in your browser. Avoid entering sensitive operational data on shared devices.</p></div>
+      </aside>
+
+      <form id="assessment" class="panel">
+        <div class="section-head"><div><p class="eyebrow">01 · CONTEXT</p><h2>Incident control record</h2></div><span class="badge">Professional v1.0</span></div>
+        <div class="grid two">
+          <label>Organisation<input name="organisation" autocomplete="organization" placeholder="Example: DemoCo EU" /></label>
+          <label>Incident reference<input name="reference" placeholder="INC-2026-001" /></label>
+          <label>When did the organisation become aware?<input name="awarenessAt" type="datetime-local" /></label>
+          <label>Detection time (if different)<input name="detectedAt" type="datetime-local" /></label>
+        </div>
+
+        <fieldset><legend>Could this be a significant incident under NIS2?</legend><p class="hint">Consider severe operational disruption, financial loss or considerable material/non-material damage to other persons. National rules may add detail.</p><div class="choice-row"><label><input type="radio" name="significant" value="yes" /> Yes / likely</label><label><input type="radio" name="significant" value="unknown" checked /> Undecided</label><label><input type="radio" name="significant" value="no" /> No / unlikely</label></div></fieldset>
+
+        <div class="section-head compact"><div><p class="eyebrow">02 · EVIDENCE</p><h2>Reporting evidence pack</h2></div></div>
+        <div class="grid two">
+          <label>Incident summary<textarea name="incidentSummary" placeholder="What happened, affected services and current state"></textarea></label>
+          <label>Suspected cause<textarea name="suspectedCause" placeholder="Malicious, unlawful, system failure, third party, unknown…"></textarea></label>
+          <label>Severity and duration<textarea name="severity" placeholder="Severity rationale, duration and service degradation"></textarea></label>
+          <label>Business and societal impact<textarea name="impact" placeholder="Users, geography, financial and operational impact"></textarea></label>
+          <label>Indicators of compromise<textarea name="indicators" placeholder="High-level indicators suitable for authority reporting"></textarea></label>
+          <label>Mitigation and containment<textarea name="mitigation" placeholder="Actions taken and planned"></textarea></label>
+          <label>Root cause / investigation status<textarea name="rootCause" placeholder="Confirmed cause or investigation status"></textarea></label>
+          <label>Lessons and follow-up<textarea name="lessons" placeholder="Corrective actions and lessons learned"></textarea></label>
+          <label>Cross-border impact<select name="crossBorder"><option value="">Not assessed</option><option>No known cross-border impact</option><option>Potential cross-border impact</option><option>Confirmed cross-border impact</option></select></label>
+          <label>Accountable reporting owner<input name="contactOwner" placeholder="Role or function — avoid personal data" /></label>
+        </div>
+        <div class="form-actions"><button type="reset" class="ghost">Clear</button><button type="submit" class="primary">Generate readiness record</button></div>
+      </form>
+    </section>
+
+    <section id="results" class="results hidden" aria-live="polite">
+      <div class="section-head"><div><p class="eyebrow">READINESS OUTPUT</p><h2>Decision dashboard</h2></div><div class="result-actions"><button id="jsonBtn" class="ghost">JSON</button><button id="mdBtn" class="ghost">Markdown</button><button id="printBtn" class="primary">Print / PDF</button></div></div>
+      <div class="score-grid"><article class="score"><span>Overall completeness</span><strong id="score">0%</strong><div class="meter"><i id="meter"></i></div></article><article class="score"><span>Immediate posture</span><strong id="posture">Review</strong><p id="postureText"></p></article></div>
+      <div id="timeline" class="timeline"></div>
+      <div class="grid two result-lower"><article><h3>Priority risks</h3><ul id="risks"></ul></article><article><h3>7 / 30 / 90-day actions</h3><ol><li><strong>7 days:</strong> confirm significance, authority route, reporting owner and evidence gaps.</li><li><strong>30 days:</strong> validate the final report, corrective actions and retained evidence.</li><li><strong>90 days:</strong> test the playbook, update suppliers and brief management.</li></ol></article></div>
+      <div class="cta"><div><p class="eyebrow">NEED AUDIT-READY ASSURANCE?</p><h2>Move from screening to a defensible NIS2 incident process.</h2><p>SpectraSec helps regulated organisations validate applicability, reporting workflows, evidence and governance.</p></div><a href="https://www.spectrasec.eu/" target="_blank" rel="noopener">Talk to SpectraSec →</a></div>
+    </section>
+
+    <section class="method"><p class="eyebrow">METHODOLOGY</p><h2>Built for operational decisions, not legal conclusions.</h2><div class="grid three"><article><strong>1 · Anchor</strong><p>Records the awareness timestamp used to calculate indicative milestones.</p></article><article><strong>2 · Test</strong><p>Tests the evidence pack against milestone-specific reporting fields.</p></article><article><strong>3 · Escalate</strong><p>Highlights missing ownership, uncertainty and deadline exposure.</p></article></div><p class="disclaimer">Decision-support only. NIS2 is implemented through national law. Confirm applicable national transposition, competent authority and CSIRT requirements. This tool is not legal advice and does not submit notifications.</p></section>
+  </main>
+  <footer><span>© 2026 SpectraSec</span><a href="https://www.spectrasec.eu/">spectrasec.eu</a><span>Version 1.0 · Last reviewed August 2026</span></footer>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
