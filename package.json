@@ -1,0 +1,10 @@
+{
+  "name": "nis2-incident-reporting-timeline",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "check": "node --check app.js && node --check core.js"
+  }
+}
