@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-
 Sitemap: https://cyber-g3.github.io/-nis2-incident-reporting-timeline./sitemap.xml
