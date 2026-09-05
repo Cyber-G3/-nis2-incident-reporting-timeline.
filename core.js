@@ -8,6 +8,28 @@ export const AUTHORITIES={EU:{name:"National competent authority / CSIRT",url:"h
 const ES={"Early warning":"Alerta temprana","Incident notification":"Notificación del incidente","Final report":"Informe final","unknown":"sin calcular","overdue":"vencido","urgent":"urgente","open":"abierto","draft":"borrador","review":"en revisión","approved":"aprobado","submitted":"enviado"};
 export const tr=value=>ES[value]||value;
 
+// Security helper to escape HTML entities and prevent XSS
+export function escapeHTML(str) {
+  return String(str ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+// Security helper to prevent Prototype Pollution when parsing stored draft input objects
+export function sanitizeDraft(saved) {
+  if (!saved || typeof saved !== "object") return {};
+  const merged = Object.assign({}, saved, saved.fields);
+  const clean = {};
+  for (const [key, val] of Object.entries(merged)) {
+    if (key === "__proto__" || key === "constructor" || key === "prototype") continue;
+    clean[key] = val;
+  }
+  return clean;
+}
+
 export function addHours(iso, hours) {
   if (!iso) return null;
   const value = new Date(iso);

@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { assessIncident, addHours, addCalendarMonth, buildMarkdown } from "../core.js";
+import { assessIncident, addHours, addCalendarMonth, buildMarkdown, escapeHTML, sanitizeDraft } from "../core.js";
 
 test("calculates the 24-hour deadline from awareness",()=>{assert.equal(addHours("2026-08-16T10:00:00Z",24).toISOString(),"2026-08-17T10:00:00.000Z")});
 test("calculates a calendar month rather than fixed 720 hours",()=>{assert.equal(addCalendarMonth("2026-01-31T10:00:00Z").toISOString(),"2026-02-28T10:00:00.000Z")});
@@ -14,3 +14,5 @@ test("markdown output contains traceable milestones",()=>{const input={organisat
 test("country selection returns the official reference route",()=>{const r=assessIncident({country:"ES",fields:{}},new Date());assert.match(r.authority.name,/INCIBE-CERT/)});
 test("workflow status remains separate from deadline status",()=>{const r=assessIncident({awarenessAt:"2026-08-16T00:00:00Z",fields:{earlyStatus:"approved"}},new Date("2026-08-16T01:00:00Z"));assert.equal(r.timelines[0].workflowStatus,"approved");assert.equal(r.timelines[0].status,"open")});
 test("Spanish export contains localized timeline",()=>{const input={lang:"es",country:"ES",fields:{}};const r=assessIncident(input,new Date());assert.match(buildMarkdown(input,r),/Cronología/)});
+test("escapes HTML characters to prevent XSS",()=>{assert.equal(escapeHTML("<script>alert('xss')</script> & \"test\""),"&lt;script&gt;alert(&#39;xss&#39;)&lt;/script&gt; &amp; &quot;test&quot;");assert.equal(escapeHTML(null),"");assert.equal(escapeHTML(undefined),"")});
+test("sanitizes draft objects to prevent prototype pollution",()=>{const untrusted=JSON.parse('{"organisation":"Demo","fields":{"incidentSummary":"test"},"__proto__":{"polluted":"yes"}}');const clean=sanitizeDraft(untrusted);assert.equal(clean.organisation,"Demo");assert.equal(clean.incidentSummary,"test");assert.equal(clean.__proto__,Object.prototype);assert.equal(Object.prototype.polluted,undefined)});
