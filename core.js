@@ -7,6 +7,7 @@ export const DEADLINES = [
 export const AUTHORITIES={EU:{name:"National competent authority / CSIRT",url:"https://www.enisa.europa.eu/topics/incident-response/csirt-inventory",note:"Select and validate the authority and channel applicable to the entity, sector and Member State."},ES:{name:"INCIBE-CERT — Spain",url:"https://www.incibe.es/incibe-cert/incidentes/respuesta-incidentes",note:"Reference route for private-law entities. Validate the competent NIS2 authority and sector-specific route."},DE:{name:"BSI / CERT-Bund — Germany",url:"https://www.bsi.bund.de/EN/Themen/Unternehmen-und-Organisationen/Cyber-Sicherheitslage/Reaktion/CERT-Bund/Meldungen-Vorfaelle/meldungen-vorfaelle_node.html",note:"Official BSI reporting information. Validate the statutory portal and entity category."},FR:{name:"CERT-FR / ANSSI — France",url:"https://cert.ssi.gouv.fr/contact/",note:"Official cyber-incident declaration reference. Validate sector and legal reporting requirements."}};
 const ES={"Early warning":"Alerta temprana","Incident notification":"Notificación del incidente","Final report":"Informe final","unknown":"sin calcular","overdue":"vencido","urgent":"urgente","open":"abierto","draft":"borrador","review":"en revisión","approved":"aprobado","submitted":"enviado"};
 export const tr=value=>ES[value]||value;
+export const escapeHtml=str=>String(str??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;");
 
 export function addHours(iso, hours) {
   if (!iso) return null;
