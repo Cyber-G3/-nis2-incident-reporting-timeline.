@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { assessIncident, addHours, addCalendarMonth, buildMarkdown } from "../core.js";
+import { assessIncident, addHours, addCalendarMonth, buildMarkdown, escapeHtml } from "../core.js";
 
 test("calculates the 24-hour deadline from awareness",()=>{assert.equal(addHours("2026-08-16T10:00:00Z",24).toISOString(),"2026-08-17T10:00:00.000Z")});
 test("calculates a calendar month rather than fixed 720 hours",()=>{assert.equal(addCalendarMonth("2026-01-31T10:00:00Z").toISOString(),"2026-02-28T10:00:00.000Z")});
@@ -14,3 +14,4 @@ test("markdown output contains traceable milestones",()=>{const input={organisat
 test("country selection returns the official reference route",()=>{const r=assessIncident({country:"ES",fields:{}},new Date());assert.match(r.authority.name,/INCIBE-CERT/)});
 test("workflow status remains separate from deadline status",()=>{const r=assessIncident({awarenessAt:"2026-08-16T00:00:00Z",fields:{earlyStatus:"approved"}},new Date("2026-08-16T01:00:00Z"));assert.equal(r.timelines[0].workflowStatus,"approved");assert.equal(r.timelines[0].status,"open")});
 test("Spanish export contains localized timeline",()=>{const input={lang:"es",country:"ES",fields:{}};const r=assessIncident(input,new Date());assert.match(buildMarkdown(input,r),/Cronología/)});
+test("sanitizes special HTML characters to prevent XSS",()=>{assert.equal(escapeHtml('<script>alert("xss")</script>'),"&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;");assert.equal(escapeHtml("a & b 'c'"),"a &amp; b &#39;c&#39;")});
