@@ -8,6 +8,20 @@ export const AUTHORITIES={EU:{name:"National competent authority / CSIRT",url:"h
 const ES={"Early warning":"Alerta temprana","Incident notification":"Notificación del incidente","Final report":"Informe final","unknown":"sin calcular","overdue":"vencido","urgent":"urgente","open":"abierto","draft":"borrador","review":"en revisión","approved":"aprobado","submitted":"enviado"};
 export const tr=value=>ES[value]||value;
 
+export function escapeHtml(str) {
+  if (typeof str !== "string") return String(str ?? "");
+  return str.replace(/[&<>"']/g, match => {
+    switch (match) {
+      case "&": return "&amp;";
+      case "<": return "&lt;";
+      case ">": return "&gt;";
+      case '"': return "&quot;";
+      case "'": return "&#39;";
+      default: return match;
+    }
+  });
+}
+
 export function addHours(iso, hours) {
   if (!iso) return null;
   const value = new Date(iso);
@@ -69,7 +83,8 @@ export function assessIncident(input, now = new Date()) {
   if (input.trustServiceProvider === true) risks.push("Trust service provider route selected: the Article 23(4) incident-notification deadline is 24 hours; validate the applicable national implementation.");
   if (fields.incidentOngoing === "yes") risks.push("Incident remains ongoing: Article 23(4)(e) requires a progress report at the final-report milestone and a final report within one month of handling the incident.");
   if (timelines.some(x => x.status === "overdue")) risks.push("One or more indicative reporting deadlines have passed.");
-  return { significant, uncertainty, completeness, timelines, risks, authority:AUTHORITIES[input.country]||AUTHORITIES.EU, generatedAt: now.toISOString() };
+  const authority = Object.hasOwn(AUTHORITIES, input.country) ? AUTHORITIES[input.country] : AUTHORITIES.EU;
+  return { significant, uncertainty, completeness, timelines, risks, authority, generatedAt: now.toISOString() };
 }
 
 export function buildMarkdown(input, result) {
