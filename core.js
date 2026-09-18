@@ -6,7 +6,7 @@ export const DEADLINES = [
 
 export const AUTHORITIES={EU:{name:"National competent authority / CSIRT",url:"https://www.enisa.europa.eu/topics/incident-response/csirt-inventory",note:"Select and validate the authority and channel applicable to the entity, sector and Member State."},ES:{name:"INCIBE-CERT — Spain",url:"https://www.incibe.es/incibe-cert/incidentes/respuesta-incidentes",note:"Reference route for private-law entities. Validate the competent NIS2 authority and sector-specific route."},DE:{name:"BSI / CERT-Bund — Germany",url:"https://www.bsi.bund.de/EN/Themen/Unternehmen-und-Organisationen/Cyber-Sicherheitslage/Reaktion/CERT-Bund/Meldungen-Vorfaelle/meldungen-vorfaelle_node.html",note:"Official BSI reporting information. Validate the statutory portal and entity category."},FR:{name:"CERT-FR / ANSSI — France",url:"https://cert.ssi.gouv.fr/contact/",note:"Official cyber-incident declaration reference. Validate sector and legal reporting requirements."}};
 const ES={"Early warning":"Alerta temprana","Incident notification":"Notificación del incidente","Final report":"Informe final","unknown":"sin calcular","overdue":"vencido","urgent":"urgente","open":"abierto","draft":"borrador","review":"en revisión","approved":"aprobado","submitted":"enviado"};
-export const tr=value=>ES[value]||value;
+export const tr=value=>Object.hasOwn(ES,value)?ES[value]:value;
 
 export function addHours(iso, hours) {
   if (!iso) return null;
@@ -69,7 +69,8 @@ export function assessIncident(input, now = new Date()) {
   if (input.trustServiceProvider === true) risks.push("Trust service provider route selected: the Article 23(4) incident-notification deadline is 24 hours; validate the applicable national implementation.");
   if (fields.incidentOngoing === "yes") risks.push("Incident remains ongoing: Article 23(4)(e) requires a progress report at the final-report milestone and a final report within one month of handling the incident.");
   if (timelines.some(x => x.status === "overdue")) risks.push("One or more indicative reporting deadlines have passed.");
-  return { significant, uncertainty, completeness, timelines, risks, authority:AUTHORITIES[input.country]||AUTHORITIES.EU, generatedAt: now.toISOString() };
+  const authority = Object.hasOwn(AUTHORITIES, input.country) ? AUTHORITIES[input.country] : AUTHORITIES.EU;
+  return { significant, uncertainty, completeness, timelines, risks, authority, generatedAt: now.toISOString() };
 }
 
 export function buildMarkdown(input, result) {
