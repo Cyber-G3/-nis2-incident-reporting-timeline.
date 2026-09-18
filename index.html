@@ -45,9 +45,9 @@
       <form id="assessment" class="panel">
         <div class="section-head"><div><p class="eyebrow">01 · CONTEXT</p><h2>Incident control record</h2></div><span class="badge">Professional v1.1</span></div>
         <div class="grid two">
-          <label>Organisation<input name="organisation" autocomplete="organization" placeholder="Example: DemoCo EU" /></label>
+          <label><span>Organisation <span class="required-asterisk" aria-hidden="true">*</span></span><input name="organisation" autocomplete="organization" placeholder="Example: DemoCo EU" required aria-required="true" /></label>
           <label>Incident reference<input name="reference" placeholder="INC-2026-001" /></label>
-          <label>When did the organisation become aware?<input name="awarenessAt" type="datetime-local" /></label>
+          <label><span>When did the organisation become aware? <span class="required-asterisk" aria-hidden="true">*</span></span><input name="awarenessAt" type="datetime-local" required aria-required="true" /></label>
           <label>Detection time (if different)<input name="detectedAt" type="datetime-local" /></label>
           <label>Country / reporting route<select name="country"><option value="EU">Other EU / validate nationally</option><option value="ES">Spain</option><option value="DE">Germany</option><option value="FR">France</option></select></label>
           <label>Decision approver<input name="approver" placeholder="Role or governance body" /></label>
@@ -58,7 +58,7 @@
 
         <div class="section-head compact"><div><p class="eyebrow">02 · EVIDENCE</p><h2>Reporting evidence pack</h2></div></div>
         <div class="grid two">
-          <label>Incident summary<textarea name="incidentSummary" placeholder="What happened, affected services and current state"></textarea></label>
+          <label><span>Incident summary <span class="required-asterisk" aria-hidden="true">*</span></span><textarea name="incidentSummary" placeholder="What happened, affected services and current state" required aria-required="true"></textarea></label>
           <label>Suspected cause<textarea name="suspectedCause" placeholder="Malicious, unlawful, system failure, third party, unknown…"></textarea></label>
           <label>Severity and duration<textarea name="severity" placeholder="Severity rationale, duration and service degradation"></textarea></label>
           <label>Business and societal impact<textarea name="impact" placeholder="Users, geography, financial and operational impact"></textarea></label>
@@ -67,7 +67,7 @@
           <label>Root cause / investigation status<textarea name="rootCause" placeholder="Confirmed cause or investigation status"></textarea></label>
           <label>Lessons and follow-up<textarea name="lessons" placeholder="Corrective actions and lessons learned"></textarea></label>
           <label>Cross-border impact<select name="crossBorder"><option value="">Not assessed</option><option>No known cross-border impact</option><option>Potential cross-border impact</option><option>Confirmed cross-border impact</option></select></label>
-          <label>Accountable reporting owner<input name="contactOwner" placeholder="Role or function — avoid personal data" /></label>
+          <label><span>Accountable reporting owner <span class="required-asterisk" aria-hidden="true">*</span></span><input name="contactOwner" placeholder="Role or function — avoid personal data" required aria-required="true" /></label>
         </div>
         <div class="section-head compact"><div><p class="eyebrow">03 · GOVERNANCE</p><h2>Approval and submission workflow</h2></div></div>
         <div class="workflow-grid"><label>24-hour early warning<select name="earlyStatus"><option value="draft">Draft</option><option value="review">In review</option><option value="approved">Approved</option><option value="submitted">Submitted</option></select><input name="earlySubmittedAt" type="datetime-local" aria-label="24-hour submission timestamp"></label><label>72-hour notification<select name="notificationStatus"><option value="draft">Draft</option><option value="review">In review</option><option value="approved">Approved</option><option value="submitted">Submitted</option></select><input name="notificationSubmittedAt" type="datetime-local" aria-label="72-hour submission timestamp"></label><label>One-month final report<select name="finalStatus"><option value="draft">Draft</option><option value="review">In review</option><option value="approved">Approved</option><option value="submitted">Submitted</option></select><input name="finalSubmittedAt" type="datetime-local" aria-label="Final submission timestamp"></label></div>
