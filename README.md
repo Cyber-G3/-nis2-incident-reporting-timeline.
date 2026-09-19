@@ -54,6 +54,10 @@ No backend, analytics or external form submission is included. Avoid entering se
 
 For NIS2 applicability, incident readiness, evidence assurance and governance support, visit [SpectraSec](https://www.spectrasec.eu/).
 
+## Portfolio case
+
+For the engineering and business case behind this project, see [docs/PORTFOLIO.md](docs/PORTFOLIO.md).
+
 ## Licence
 
 MIT. See [LICENSE](LICENSE).
