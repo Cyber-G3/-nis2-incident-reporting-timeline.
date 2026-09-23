@@ -69,7 +69,7 @@ export function assessIncident(input, now = new Date()) {
   if (input.trustServiceProvider === true) risks.push("Trust service provider route selected: the Article 23(4) incident-notification deadline is 24 hours; validate the applicable national implementation.");
   if (fields.incidentOngoing === "yes") risks.push("Incident remains ongoing: Article 23(4)(e) requires a progress report at the final-report milestone and a final report within one month of handling the incident.");
   if (timelines.some(x => x.status === "overdue")) risks.push("One or more indicative reporting deadlines have passed.");
-  return { significant, uncertainty, completeness, timelines, risks, authority:AUTHORITIES[input.country]||AUTHORITIES.EU, generatedAt: now.toISOString() };
+  return { significant, uncertainty, completeness, timelines, risks, authority:(Object.prototype.hasOwnProperty.call(AUTHORITIES, input.country) && AUTHORITIES[input.country]) || AUTHORITIES.EU, generatedAt: now.toISOString() };
 }
 
 export function buildMarkdown(input, result) {
