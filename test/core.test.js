@@ -14,3 +14,4 @@ test("markdown output contains traceable milestones",()=>{const input={organisat
 test("country selection returns the official reference route",()=>{const r=assessIncident({country:"ES",fields:{}},new Date());assert.match(r.authority.name,/INCIBE-CERT/)});
 test("workflow status remains separate from deadline status",()=>{const r=assessIncident({awarenessAt:"2026-08-16T00:00:00Z",fields:{earlyStatus:"approved"}},new Date("2026-08-16T01:00:00Z"));assert.equal(r.timelines[0].workflowStatus,"approved");assert.equal(r.timelines[0].status,"open")});
 test("Spanish export contains localized timeline",()=>{const input={lang:"es",country:"ES",fields:{}};const r=assessIncident(input,new Date());assert.match(buildMarkdown(input,r),/Cronología/)});
+test("prototype property lookup falls back safely to default EU authority",()=>{const r=assessIncident({country:"constructor",fields:{}},new Date());assert.equal(r.authority.name,"National competent authority / CSIRT")});
