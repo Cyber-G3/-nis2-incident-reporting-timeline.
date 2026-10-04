@@ -8,6 +8,19 @@ export const AUTHORITIES={EU:{name:"National competent authority / CSIRT",url:"h
 const ES={"Early warning":"Alerta temprana","Incident notification":"Notificación del incidente","Final report":"Informe final","unknown":"sin calcular","overdue":"vencido","urgent":"urgente","open":"abierto","draft":"borrador","review":"en revisión","approved":"aprobado","submitted":"enviado"};
 export const tr=value=>ES[value]||value;
 
+/**
+ * Escapes HTML characters to prevent XSS vulnerabilities when inserting un-sanitized dynamic text into innerHTML.
+ */
+export function escapeHtml(str) {
+  if (str === null || str === undefined) return "";
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 export function addHours(iso, hours) {
   if (!iso) return null;
   const value = new Date(iso);
