@@ -1,0 +1,3 @@
+## 2026-03-30 - In-place DOM updates for timer intervals
+**Learning:** In client-side vanilla JavaScript web apps with ticking counters (e.g. `setInterval`), re-rendering entire component containers via `innerHTML` every second destroys and rebuilds DOM trees unnecessarily. Updating text nodes in-place via targeted `querySelectorAll` and `textContent` checks eliminates layout thrashing, DOM allocations, and HTML parsing overhead.
+**Action:** When working with periodic timer updates, update text content of existing DOM nodes directly rather than re-rendering container subtrees with `innerHTML`.
