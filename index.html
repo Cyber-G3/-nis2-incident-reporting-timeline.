@@ -37,7 +37,7 @@
       <aside class="steps" aria-label="Assessment progress">
         <p class="eyebrow">ASSESSMENT</p>
         <ol>
-          <li class="active">Incident context</li><li>Significance triage</li><li>Evidence record</li><li>Timeline & actions</li>
+          <li class="active" aria-current="step">Incident context</li><li>Significance triage</li><li>Evidence record</li><li>Timeline & actions</li>
         </ol>
         <div class="privacy"><strong>Privacy by design</strong><p>Information stays in your browser. Avoid entering sensitive operational data on shared devices.</p></div>
       </aside>
@@ -54,7 +54,7 @@
         </div>
         <div id="authorityCard" class="authority-card"><span>Official route reference</span><strong id="authorityName"></strong><p id="authorityNote"></p><a id="authorityLink" target="_blank" rel="noopener">Open official reference ↗</a></div>
 
-        <fieldset><legend>Could this be a significant incident under NIS2?</legend><p class="hint">Consider severe operational disruption, financial loss or considerable material/non-material damage to other persons. National rules may add detail.</p><div class="choice-row"><label><input type="radio" name="significant" value="yes" /> Yes / likely</label><label><input type="radio" name="significant" value="unknown" checked /> Undecided</label><label><input type="radio" name="significant" value="no" /> No / unlikely</label></div></fieldset>
+        <fieldset aria-describedby="sigHint"><legend>Could this be a significant incident under NIS2?</legend><p id="sigHint" class="hint">Consider severe operational disruption, financial loss or considerable material/non-material damage to other persons. National rules may add detail.</p><div class="choice-row"><label><input type="radio" name="significant" value="yes" /> Yes / likely</label><label><input type="radio" name="significant" value="unknown" checked /> Undecided</label><label><input type="radio" name="significant" value="no" /> No / unlikely</label></div></fieldset>
 
         <div class="section-head compact"><div><p class="eyebrow">02 · EVIDENCE</p><h2>Reporting evidence pack</h2></div></div>
         <div class="grid two">
@@ -77,7 +77,7 @@
     </section>
 
     <section id="results" class="results hidden" aria-live="polite">
-      <div class="section-head"><div><p class="eyebrow">READINESS OUTPUT</p><h2>Decision dashboard</h2></div><div class="result-actions"><button id="jsonBtn" class="ghost">JSON</button><button id="mdBtn" class="ghost">Markdown</button><button id="printBtn" class="primary">Print / PDF</button></div></div>
+      <div class="section-head"><div><p class="eyebrow">READINESS OUTPUT</p><h2>Decision dashboard</h2></div><div class="result-actions"><button id="jsonBtn" class="ghost" aria-label="Export readiness record as JSON">JSON</button><button id="mdBtn" class="ghost" aria-label="Export readiness record as Markdown">Markdown</button><button id="printBtn" class="primary" aria-label="Print or save readiness record as PDF">Print / PDF</button></div></div>
       <div class="score-grid"><article class="score"><span>Overall completeness</span><strong id="score">0%</strong><div class="meter"><i id="meter"></i></div></article><article class="score"><span>Immediate posture</span><strong id="posture">Review</strong><p id="postureText"></p></article></div>
       <div id="timeline" class="timeline"></div>
       <div class="grid two result-lower"><article><h3>Priority risks</h3><ul id="risks"></ul></article><article><h3>7 / 30 / 90-day actions</h3><ol><li><strong>7 days:</strong> confirm significance, authority route, reporting owner and evidence gaps.</li><li><strong>30 days:</strong> validate the final report, corrective actions and retained evidence.</li><li><strong>90 days:</strong> test the playbook, update suppliers and brief management.</li></ol></article></div>
