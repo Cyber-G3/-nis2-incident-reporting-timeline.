@@ -8,6 +8,16 @@ export const AUTHORITIES={EU:{name:"National competent authority / CSIRT",url:"h
 const ES={"Early warning":"Alerta temprana","Incident notification":"Notificación del incidente","Final report":"Informe final","unknown":"sin calcular","overdue":"vencido","urgent":"urgente","open":"abierto","draft":"borrador","review":"en revisión","approved":"aprobado","submitted":"enviado"};
 export const tr=value=>ES[value]||value;
 
+export function escapeHTML(str) {
+  if (!str) return "";
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 export function addHours(iso, hours) {
   if (!iso) return null;
   const value = new Date(iso);
@@ -56,7 +66,7 @@ export function assessIncident(input, now = new Date()) {
       completion: Math.round(((item.required.length - missing.length) / item.required.length) * 100),
       status: !due ? "unknown" : remainingMs < 0 ? "overdue" : remainingMs <= 6 * 3600000 ? "urgent" : "open",
       remainingMs,
-      workflowStatus: fields[item.id+"Status"]||"draft",
+      workflowStatus: escapeHTML(fields[item.id+"Status"]||"draft"),
       submittedAt: fields[item.id+"SubmittedAt"]||null
     };
   });
