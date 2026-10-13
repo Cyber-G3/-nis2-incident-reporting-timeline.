@@ -45,12 +45,12 @@
       <form id="assessment" class="panel">
         <div class="section-head"><div><p class="eyebrow">01 · CONTEXT</p><h2>Incident control record</h2></div><span class="badge">Professional v1.1</span></div>
         <div class="grid two">
-          <label>Organisation<input name="organisation" autocomplete="organization" placeholder="Example: DemoCo EU" /></label>
-          <label>Incident reference<input name="reference" placeholder="INC-2026-001" /></label>
-          <label>When did the organisation become aware?<input name="awarenessAt" type="datetime-local" /></label>
-          <label>Detection time (if different)<input name="detectedAt" type="datetime-local" /></label>
-          <label>Country / reporting route<select name="country"><option value="EU">Other EU / validate nationally</option><option value="ES">Spain</option><option value="DE">Germany</option><option value="FR">France</option></select></label>
-          <label>Decision approver<input name="approver" placeholder="Role or governance body" /></label>
+          <label for="organisation">Organisation<input id="organisation" name="organisation" autocomplete="organization" placeholder="Example: DemoCo EU" /></label>
+          <label for="reference">Incident reference<input id="reference" name="reference" placeholder="INC-2026-001" /></label>
+          <label for="awarenessAt">When did the organisation become aware?<input id="awarenessAt" name="awarenessAt" type="datetime-local" /></label>
+          <label for="detectedAt">Detection time (if different)<input id="detectedAt" name="detectedAt" type="datetime-local" /></label>
+          <label for="country">Country / reporting route<select id="country" name="country"><option value="EU">Other EU / validate nationally</option><option value="ES">Spain</option><option value="DE">Germany</option><option value="FR">France</option></select></label>
+          <label for="approver">Decision approver<input id="approver" name="approver" placeholder="Role or governance body" /></label>
         </div>
         <div id="authorityCard" class="authority-card"><span>Official route reference</span><strong id="authorityName"></strong><p id="authorityNote"></p><a id="authorityLink" target="_blank" rel="noopener">Open official reference ↗</a></div>
 
@@ -58,20 +58,20 @@
 
         <div class="section-head compact"><div><p class="eyebrow">02 · EVIDENCE</p><h2>Reporting evidence pack</h2></div></div>
         <div class="grid two">
-          <label>Incident summary<textarea name="incidentSummary" placeholder="What happened, affected services and current state"></textarea></label>
-          <label>Suspected cause<textarea name="suspectedCause" placeholder="Malicious, unlawful, system failure, third party, unknown…"></textarea></label>
-          <label>Severity and duration<textarea name="severity" placeholder="Severity rationale, duration and service degradation"></textarea></label>
-          <label>Business and societal impact<textarea name="impact" placeholder="Users, geography, financial and operational impact"></textarea></label>
-          <label>Indicators of compromise<textarea name="indicators" placeholder="High-level indicators suitable for authority reporting"></textarea></label>
-          <label>Mitigation and containment<textarea name="mitigation" placeholder="Actions taken and planned"></textarea></label>
-          <label>Root cause / investigation status<textarea name="rootCause" placeholder="Confirmed cause or investigation status"></textarea></label>
-          <label>Lessons and follow-up<textarea name="lessons" placeholder="Corrective actions and lessons learned"></textarea></label>
-          <label>Cross-border impact<select name="crossBorder"><option value="">Not assessed</option><option>No known cross-border impact</option><option>Potential cross-border impact</option><option>Confirmed cross-border impact</option></select></label>
-          <label>Accountable reporting owner<input name="contactOwner" placeholder="Role or function — avoid personal data" /></label>
+          <label for="incidentSummary">Incident summary<textarea id="incidentSummary" name="incidentSummary" placeholder="What happened, affected services and current state"></textarea></label>
+          <label for="suspectedCause">Suspected cause<textarea id="suspectedCause" name="suspectedCause" placeholder="Malicious, unlawful, system failure, third party, unknown…"></textarea></label>
+          <label for="severity">Severity and duration<textarea id="severity" name="severity" placeholder="Severity rationale, duration and service degradation"></textarea></label>
+          <label for="impact">Business and societal impact<textarea id="impact" name="impact" placeholder="Users, geography, financial and operational impact"></textarea></label>
+          <label for="indicators">Indicators of compromise<textarea id="indicators" name="indicators" placeholder="High-level indicators suitable for authority reporting"></textarea></label>
+          <label for="mitigation">Mitigation and containment<textarea id="mitigation" name="mitigation" placeholder="Actions taken and planned"></textarea></label>
+          <label for="rootCause">Root cause / investigation status<textarea id="rootCause" name="rootCause" placeholder="Confirmed cause or investigation status"></textarea></label>
+          <label for="lessons">Lessons and follow-up<textarea id="lessons" name="lessons" placeholder="Corrective actions and lessons learned"></textarea></label>
+          <label for="crossBorder">Cross-border impact<select id="crossBorder" name="crossBorder"><option value="">Not assessed</option><option>No known cross-border impact</option><option>Potential cross-border impact</option><option>Confirmed cross-border impact</option></select></label>
+          <label for="contactOwner">Accountable reporting owner<input id="contactOwner" name="contactOwner" placeholder="Role or function — avoid personal data" /></label>
         </div>
         <div class="section-head compact"><div><p class="eyebrow">03 · GOVERNANCE</p><h2>Approval and submission workflow</h2></div></div>
-        <div class="workflow-grid"><label>24-hour early warning<select name="earlyStatus"><option value="draft">Draft</option><option value="review">In review</option><option value="approved">Approved</option><option value="submitted">Submitted</option></select><input name="earlySubmittedAt" type="datetime-local" aria-label="24-hour submission timestamp"></label><label>72-hour notification<select name="notificationStatus"><option value="draft">Draft</option><option value="review">In review</option><option value="approved">Approved</option><option value="submitted">Submitted</option></select><input name="notificationSubmittedAt" type="datetime-local" aria-label="72-hour submission timestamp"></label><label>One-month final report<select name="finalStatus"><option value="draft">Draft</option><option value="review">In review</option><option value="approved">Approved</option><option value="submitted">Submitted</option></select><input name="finalSubmittedAt" type="datetime-local" aria-label="Final submission timestamp"></label></div>
-        <label class="decision-log">Decision log<textarea name="decisionLog" placeholder="Record UTC time, decision, rationale, owner and approval. Do not include secrets."></textarea></label>
+        <div class="workflow-grid"><div class="workflow-item"><span>24-hour early warning</span><label for="earlyStatus" class="sr-only">24-hour early warning status</label><select id="earlyStatus" name="earlyStatus"><option value="draft">Draft</option><option value="review">In review</option><option value="approved">Approved</option><option value="submitted">Submitted</option></select><label for="earlySubmittedAt" class="sr-only">24-hour submission timestamp</label><input id="earlySubmittedAt" name="earlySubmittedAt" type="datetime-local" aria-label="24-hour submission timestamp"></div><div class="workflow-item"><span>72-hour notification</span><label for="notificationStatus" class="sr-only">72-hour notification status</label><select id="notificationStatus" name="notificationStatus"><option value="draft">Draft</option><option value="review">In review</option><option value="approved">Approved</option><option value="submitted">Submitted</option></select><label for="notificationSubmittedAt" class="sr-only">72-hour submission timestamp</label><input id="notificationSubmittedAt" name="notificationSubmittedAt" type="datetime-local" aria-label="72-hour submission timestamp"></div><div class="workflow-item"><span>One-month final report</span><label for="finalStatus" class="sr-only">One-month final report status</label><select id="finalStatus" name="finalStatus"><option value="draft">Draft</option><option value="review">In review</option><option value="approved">Approved</option><option value="submitted">Submitted</option></select><label for="finalSubmittedAt" class="sr-only">Final submission timestamp</label><input id="finalSubmittedAt" name="finalSubmittedAt" type="datetime-local" aria-label="Final submission timestamp"></div></div>
+        <label for="decisionLog" class="decision-log">Decision log<textarea id="decisionLog" name="decisionLog" placeholder="Record UTC time, decision, rationale, owner and approval. Do not include secrets."></textarea></label>
         <div class="form-actions"><button type="reset" class="ghost">Clear</button><button type="submit" class="primary">Generate readiness record</button></div>
       </form>
     </section>
