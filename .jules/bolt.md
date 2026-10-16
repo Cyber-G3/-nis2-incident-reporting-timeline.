@@ -1,0 +1,3 @@
+## 2026-03-30 - Periodic DOM Teardown & DateFormatter Allocations
+**Learning:** Calling full template string re-renders and `innerHTML` assignments inside periodic 1s timers destroys/re-creates DOM subtrees every tick, causing continuous DOM churn, reflows, and unnecessary garbage collection. Additionally, creating `new Intl.DateTimeFormat` inside loop/interval formatters incurs high object instantiation overhead.
+**Action:** Cache `Intl.DateTimeFormat` instances at module scope and update individual text content nodes directly in interval callbacks instead of re-rendering full HTML templates.
