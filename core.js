@@ -5,6 +5,7 @@ export const DEADLINES = [
 ];
 
 export const AUTHORITIES={EU:{name:"National competent authority / CSIRT",url:"https://www.enisa.europa.eu/topics/incident-response/csirt-inventory",note:"Select and validate the authority and channel applicable to the entity, sector and Member State."},ES:{name:"INCIBE-CERT — Spain",url:"https://www.incibe.es/incibe-cert/incidentes/respuesta-incidentes",note:"Reference route for private-law entities. Validate the competent NIS2 authority and sector-specific route."},DE:{name:"BSI / CERT-Bund — Germany",url:"https://www.bsi.bund.de/EN/Themen/Unternehmen-und-Organisationen/Cyber-Sicherheitslage/Reaktion/CERT-Bund/Meldungen-Vorfaelle/meldungen-vorfaelle_node.html",note:"Official BSI reporting information. Validate the statutory portal and entity category."},FR:{name:"CERT-FR / ANSSI — France",url:"https://cert.ssi.gouv.fr/contact/",note:"Official cyber-incident declaration reference. Validate sector and legal reporting requirements."}};
+const ALLOWED_WORKFLOW_STATUSES = ["draft", "review", "approved", "submitted"];
 const ES={"Early warning":"Alerta temprana","Incident notification":"Notificación del incidente","Final report":"Informe final","unknown":"sin calcular","overdue":"vencido","urgent":"urgente","open":"abierto","draft":"borrador","review":"en revisión","approved":"aprobado","submitted":"enviado"};
 export const tr=value=>ES[value]||value;
 
@@ -56,7 +57,8 @@ export function assessIncident(input, now = new Date()) {
       completion: Math.round(((item.required.length - missing.length) / item.required.length) * 100),
       status: !due ? "unknown" : remainingMs < 0 ? "overdue" : remainingMs <= 6 * 3600000 ? "urgent" : "open",
       remainingMs,
-      workflowStatus: fields[item.id+"Status"]||"draft",
+      // Validate workflow status against an allowlist to prevent unvalidated input injection
+      workflowStatus: ALLOWED_WORKFLOW_STATUSES.includes(fields[item.id+"Status"]) ? fields[item.id+"Status"] : "draft",
       submittedAt: fields[item.id+"SubmittedAt"]||null
     };
   });
