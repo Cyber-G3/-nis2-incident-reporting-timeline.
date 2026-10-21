@@ -1,0 +1,3 @@
+## 2026-03-30 - Keyboard Navigation & Skip Link Accessibility
+**Learning:** In single-page form/dashboard tools without standard landmark navigation or skip links, keyboard users must tab through header links on every load, and default focus outlines on custom styled buttons/inputs can be subtle or obscured. Adding a visible `:focus-visible` indicator and a skip link improves keyboard navigation without altering mouse UX.
+**Action:** Always ensure `:focus-visible` ring/outline rules and skip links (`.skip-link`) are included in core accessibility styling across light-weight landing page forms.
