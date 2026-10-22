@@ -8,6 +8,18 @@ export const AUTHORITIES={EU:{name:"National competent authority / CSIRT",url:"h
 const ES={"Early warning":"Alerta temprana","Incident notification":"Notificación del incidente","Final report":"Informe final","unknown":"sin calcular","overdue":"vencido","urgent":"urgente","open":"abierto","draft":"borrador","review":"en revisión","approved":"aprobado","submitted":"enviado"};
 export const tr=value=>ES[value]||value;
 
+const FORBIDDEN_KEYS = new Set(["__proto__", "constructor", "prototype"]);
+export function sanitizeDraftFields(obj) {
+  if (!obj || typeof obj !== "object") return {};
+  const clean = {};
+  for (const key of Object.keys(obj)) {
+    if (!FORBIDDEN_KEYS.has(key) && typeof obj[key] === "string") {
+      clean[key] = obj[key];
+    }
+  }
+  return clean;
+}
+
 export function addHours(iso, hours) {
   if (!iso) return null;
   const value = new Date(iso);
