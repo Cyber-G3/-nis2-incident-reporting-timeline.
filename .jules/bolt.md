@@ -1,0 +1,3 @@
+## 2026-03-30 - Caching Intl.DateTimeFormat and Granular Countdown Updates
+**Learning:** Instantiating `new Intl.DateTimeFormat(...)` on every date formatting call in client-side loops or timer ticks causes severe execution overhead (~240x slower than reusing an instance) due to locale resolution and internal spec initialization. Furthermore, rebuilding an entire timeline via `innerHTML` every second in a timer destroys/recreates DOM trees, triggers reflows, and resets any selections.
+**Action:** Always cache `Intl.DateTimeFormat` instances per locale/options combination, and target specific text nodes (`el.textContent` on `.countdown` elements storing `data-due`) during periodic countdown intervals rather than re-rendering container HTML.
