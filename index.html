@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <!-- Enforce Content Security Policy for defense-in-depth against XSS and data exfiltration -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';" />
   <title>NIS2 Incident Reporting Timeline & Readiness Checker | SpectraSec</title>
   <meta name="description" content="Build an evidence-ready NIS2 incident notification timeline for the 24-hour early warning, 72-hour notification and one-month final report." />
   <meta name="robots" content="index,follow" />
